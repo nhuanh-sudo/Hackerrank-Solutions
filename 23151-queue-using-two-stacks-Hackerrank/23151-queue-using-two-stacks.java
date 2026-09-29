@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Stack<Integer> stack1 = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int q = sc.nextInt();
+        
+        for (int i = 0; i < q; i++) {
+            int type = sc.nextInt();
+            
+            if (type == 1) {
+                int x = sc.nextInt();
+                stack1.push(x);
+            }
+            
+            if (type == 2) {
+                while (stack2.isEmpty()) {
+                    if (!stack1.isEmpty()) {
+                        stack2.push(stack1.pop());
+                    }
+                }
+                stack2.pop();
+            }
+            if (type == 3) {
+                while (stack2.isEmpty()) {
+                    if (!stack1.isEmpty()) {
+                        stack2.push(stack1.pop());
+                    }
+                }
+                System.out.println(stack2.peek());
+            }
+        }
+    }
+}
+
+
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
