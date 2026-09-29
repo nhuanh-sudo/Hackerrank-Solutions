@@ -1,0 +1,26 @@
+name: Remove Extension Watermarks
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    clean:
+      runs-on: ubuntu-latest
+      permissions:
+        contents: write # Cấp quyền cho phép GitHub Action tự động commit lại code
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
+        - name: Delete LeetHub signature comments in Java files
+          run: |
+            find . -type f -name "*.java" -exec sed -i '/Synced seamlessly with LeetHub/d' {} +
+            find . -type f -name "*.java" -exec sed -i '/Pro features:/d' {} +
+            find . -type f -name "*.java" -exec sed -i '/Get it here:/d' {} +
+
+        - name: Commit cleaned files
+          uses: stefanzweifel/git-auto-commit-action@v5
+          with:
+            commit_message: "Auto-remove extension signature comments"
